@@ -1,0 +1,82 @@
+@import "../../more.css";
+
+.flex {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../../../assets/info-bg.jpg");
+  background-size: 1920px 1080px;
+
+  .formBox {
+    width: 400px;
+    height: 560px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    perspective: 500px;
+
+    .preserve-box {
+      position: relative;
+      transition: 1s;
+      // 给子盒子开启三维环境
+      transform-style: preserve-3d;
+
+      > div {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        backface-visibility: hidden;
+
+        .to-span {
+          color: #347Abb;
+          margin: 20px 0;
+
+          span {
+            cursor: pointer;
+
+            &:hover {
+              color: #1890ff;
+            }
+          }
+        }
+      }
+
+      .register-box {
+        transform: rotateY(180deg);
+      }
+    }
+  }
+
+  .title {
+    margin: 60px 0 40px;
+    text-align: center;
+    font-weight: 400;
+  }
+}
+
+.only-input {
+  margin-bottom: 30px;
+
+  span {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+    &:focus {
+      box-shadow: 0 2px 0 0 rgb(67 119 254 / 20%);
+    }
+  }
+}
+
+*[class$='icon'] {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
