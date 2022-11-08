@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理系统登录</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css" th:href="@{/css/login.css}"/>
+    <script th:src="@{/js/jquery-3.6.0.js}" src="../static/js/jquery-3.6.0.js"></script>
+</head>
+<body>
+
+<div id="particles-js">
+    <form action="/admin/login" method="post" th:action="@{/admin/login}">
+        <div class="login">
+            <div class="login-top" style="text-align: center;">登录</div>
+            <div id="container" style="margin-bottom: 50px">
+                <div class="login-center first">
+                    <div class="login-center-img"><img src="../static/img/name.png" th:src="@{/img/name.png}" alt="">
+                    </div>
+                    <div class="login-center-input">
+                        <input type="text" id="phone" name="phone" placeholder="请输入您的手机号"
+                               onfocus="this.placeholder=''"
+                               onblur="this.placeholder='请输入您的手机号'"/>
+                        <label for="phone" class="login-center-input-text">手机号</label>
+                    </div>
+                </div>
+                <div class="login-center">
+                    <div class="login-center-img">
+                        <img src="../static/img/password.png" th:src="@{/img/password.png}" alt="锁"/>
+                    </div>
+                    <div class="login-center-input">
+                        <input id="password" type="password" name="password" placeholder="请输入您的密码"
+                               onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>
+                        <label for="password" class="login-center-input-text">密码</label>
+                    </div>
+                </div>
+                <div class="login-center">
+                    <div class="login-center-img"><img src="../static/img/password.png" th:src="@{/img/password.png}"
+                                                       alt="锁"/>
+                    </div>
+                    <div class="login-center-input" id="captcha-input">
+                        <input id="captcha" type="text" name="captcha" placeholder="请输入验证码"
+                               onfocus="this.placeholder=''" onblur="this.placeholder='请输入验证码'"/>
+                        <label for="captcha" class="login-center-input-text">验证码</label>
+                        <label id="captcha-get">发送验证码</label>
+                    </div>
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="登录" class="login-button" style="border: 0;"/>
+            </div>
+        </div>
+    </form>
+</div>
+<th:block th:if="${loginStatus} != null">
+    <script th:inline="javascript">
+        alert('信息:[(${loginStatus.msg})],错误代码:[(${loginStatus.code})]');
+    </script>
+</th:block>
+<script type="text/javascript" th:inline="javascript">
+    $(function () {
+        $("#captcha-get").click(function () {
+            let phone;
+            if ((phone = $("#phone").val()) != null) {
+                $.get("[(@{/admin/login/captcha})]", {
+                    "phone":phone
+                },function (msg){
+                    alert(msg)
+                });
+            }
+        })
+    })
+</script>
+<script src="../static/js/particles.min.js" th:src="@{/js/particles.min.js}" type="text/javascript" charset="utf-8"></script>
+<script src="../static/js/app.js" th:src="@{/js/app.js}" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "web.interceptor.auto.base-packages",
+      "type": "java.lang.String[]",
+      "description": "Description for web.interceptor.auto.base-packages."
+    },
+    {
+      "name": "web.data.rules.auto.base-packages",
+      "type": "java.lang.String[]",
+      "description": "Description for web.data.rules.auto.base-packages."
+    }
+  ] }

@@ -1,0 +1,20 @@
+<!--
+    author:付高宏
+    time:2022/10/26 14:18
+-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.fmcy.adminserver.mapper.UserMapper">
+
+    <select id="getUsersByPermission" resultType="xyz.fmcy.pt.pojo.User">
+        select *
+        from user as u
+                 left join permissions as p on u.id = p.uid
+        <where>
+            p.type = #{permission}
+        </where>
+        limit #{start},#{len}
+    </select>
+
+</mapper>

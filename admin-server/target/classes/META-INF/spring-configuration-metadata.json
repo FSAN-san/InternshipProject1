@@ -1,0 +1,79 @@
+{
+  "groups": [
+    {
+      "name": "web.data.rules.auto",
+      "type": "xyz.fmcy.adminserver.filter.format.RulesClassAutoScanner",
+      "sourceType": "xyz.fmcy.adminserver.filter.format.RulesClassAutoScanner"
+    },
+    {
+      "name": "web.interceptor.auto",
+      "type": "xyz.fmcy.adminserver.webInterceptor.auto.WebInterceptorScanner",
+      "sourceType": "xyz.fmcy.adminserver.webInterceptor.auto.WebInterceptorScanner"
+    }
+  ],
+  "properties": [
+    {
+      "name": "web.data.rules.auto.base-packages",
+      "type": "java.lang.String[]",
+      "description": "Description for web.data.rules.auto.base-packages.",
+      "sourceType": "xyz.fmcy.adminserver.filter.format.RulesClassAutoScanner"
+    },
+    {
+      "name": "web.data.rules.auto.bean-definition-defaults",
+      "type": "org.springframework.beans.factory.support.BeanDefinitionDefaults",
+      "sourceType": "xyz.fmcy.adminserver.filter.format.RulesClassAutoScanner"
+    },
+    {
+      "name": "web.data.rules.auto.environment",
+      "type": "org.springframework.core.env.Environment",
+      "sourceType": "xyz.fmcy.adminserver.filter.format.RulesClassAutoScanner"
+    },
+    {
+      "name": "web.data.rules.auto.metadata-reader-factory",
+      "type": "org.springframework.core.type.classreading.MetadataReaderFactory",
+      "sourceType": "xyz.fmcy.adminserver.filter.format.RulesClassAutoScanner"
+    },
+    {
+      "name": "web.data.rules.auto.resource-loader",
+      "type": "org.springframework.core.io.ResourceLoader",
+      "sourceType": "xyz.fmcy.adminserver.filter.format.RulesClassAutoScanner"
+    },
+    {
+      "name": "web.interceptor.auto.base-packages",
+      "type": "java.lang.String[]",
+      "description": "Description for web.interceptor.auto.base-packages.",
+      "sourceType": "xyz.fmcy.adminserver.webInterceptor.auto.WebInterceptorScanner"
+    },
+    {
+      "name": "web.interceptor.auto.bean-definition-defaults",
+      "type": "org.springframework.beans.factory.support.BeanDefinitionDefaults",
+      "sourceType": "xyz.fmcy.adminserver.webInterceptor.auto.WebInterceptorScanner"
+    },
+    {
+      "name": "web.interceptor.auto.environment",
+      "type": "org.springframework.core.env.Environment",
+      "sourceType": "xyz.fmcy.adminserver.webInterceptor.auto.WebInterceptorScanner"
+    },
+    {
+      "name": "web.interceptor.auto.interceptor-classes",
+      "type": "java.util.List<java.lang.Class<?>>",
+      "sourceType": "xyz.fmcy.adminserver.webInterceptor.auto.WebInterceptorScanner"
+    },
+    {
+      "name": "web.interceptor.auto.metadata-reader-factory",
+      "type": "org.springframework.core.type.classreading.MetadataReaderFactory",
+      "sourceType": "xyz.fmcy.adminserver.webInterceptor.auto.WebInterceptorScanner"
+    },
+    {
+      "name": "web.interceptor.auto.resource-loader",
+      "type": "org.springframework.core.io.ResourceLoader",
+      "sourceType": "xyz.fmcy.adminserver.webInterceptor.auto.WebInterceptorScanner"
+    },
+    {
+      "name": "web.interceptor.auto.web-interceptor-infos",
+      "type": "java.util.List<xyz.fmcy.adminserver.webInterceptor.auto.WebInterceptorInfo>",
+      "sourceType": "xyz.fmcy.adminserver.webInterceptor.auto.WebInterceptorScanner"
+    }
+  ],
+  "hints": []
+}

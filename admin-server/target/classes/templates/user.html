@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+    <script src="/static/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+</head>
+<body>
+<div class="layui-container">
+    <div class="layui-card">
+        <div class="layui-card-header layui-bg-green">
+            <h3>用户表管理</h3>
+        </div>
+        <div class="layui-card-body">
+            <table class="layui-hide" id="user_table"></table>
+        </div>
+    </div>
+    <script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+            <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+        </div>
+    </script>
+    <script type="text/html" id="checkboxTpl">
+        <input type="checkbox" name="lock" value="{{d.id}}" lay-filter="lock" title="锁定" {{d.lock?'checked':''}} />
+    </script>
+
+
+    <script th:inline="javascript">
+        const PER_USER = 0;
+        const PER_PRODUCE = 1;
+        const PER_ADMIN = 2;
+        const PER_SUPER_ADMIN = 3;
+        const PER_USER_TEXT = "用户";
+        const PER_PRODUCE_TEXT = "注册用户";
+        const PER_ADMIN_TEXT = "系统管理员";
+        const PER_SUPER_ADMIN_TEXT = "超级管理员";
+        layui.use(['table','form'], function () {
+            let form = layui.form;
+            let table = layui.table;
+            let $ = layui.$
+            //第一个实例
+            table.render({
+                elem: '#user_table'
+                , url: '[(@{/admin/user/data})]'
+                , toolbar: '#toolbar'
+                , page: true
+                , limit: 10
+                , parseData(res) {
+                    let d = res.data
+                    for (let i = 0; i < d.length; i++) {
+                        switch (d[i].permission) {
+                            case PER_USER: {
+                                d[i].permission = PER_USER_TEXT
+                                break;
+                            }
+                            case PER_PRODUCE: {
+                                d[i].permission = PER_PRODUCE_TEXT
+                                break;
+                            }
+                            case PER_ADMIN: {
+                                d[i].permission = PER_ADMIN_TEXT
+                                break;
+                            }
+                            case PER_SUPER_ADMIN: {
+                                d[i].permission = PER_SUPER_ADMIN_TEXT
+                                break;
+                            }
+                            default: {
+                                d[i].permission = "账号被封禁"
+                            }
+                        }
+                    }
+                    return res;
+                }
+                , cols: [[ //表头
+                    {type: 'checkbox'},
+                    {field: 'id', width: 80, title: 'ID', sort: true}
+                    , {field: 'username', title: '用户名'}
+                    , {field: 'permission', title: '权限'}
+                    , {field: 'phone', title: '手机号'}
+                    , {field: 'lock', title: '是否锁定', width: 110, templet: '#checkboxTpl', unresize: true}
+                ]]
+            });
+            form.on('checkbox(lock)',function (obj) {
+                console.log(obj)
+                $.ajax(
+                    {
+                        type: 'post',
+                        url: "[(@{/admin/user/lock})]",
+                        data:{'userid':obj.value},
+                        success:function (p) {
+                            console.log(p)
+                        }
+                    }
+                )
+            })
+        });
+    </script>
+</div>
+</body>
+</html>

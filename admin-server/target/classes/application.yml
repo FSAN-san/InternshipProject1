@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: admin-server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql:///pt_db?serverTimezone=UTC #jdbc:mysql://121.4.252.73:3307/pt_db?serverTimezone=UTC
+  thymeleaf:
+    prefix: classpath:/templates/
+  redis:
+    host: 121.4.252.73
+    port: 6380
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 300
+    password: A_Redis
+
+
+
+web:
+  interceptor:
+    auto:
+      base-packages:
+        - xyz.fmcy.adminserver.webInterceptor.app #拦截器自动装配路径
+  data:
+    rules:
+      auto:
+        base-packages:
+          - xyz.fmcy.adminserver.filter.app.rules
+
+aliyu:
+  accessKeyId: LTAI5t92yBJPVJbYPZksbp7G
+  accessKeySecret: W4XxaIZf7DMSmCsrYY5PBs6fApRwzv
+  sms:
+    url: dysmsapi.aliyuncs.com
+    sign-name: 阿里云短信测试
+    template-code: SMS_154950909
+  oss:
+    endpoint: https://oss-cn-hangzhou.aliyuncs.com
+    bucket-name: xyz-fmcy-ceshi
+    app:
+      dirs:
+        user-artwork: user_art_work
+        test-dir: demotree
+server:
+  port: 8081
