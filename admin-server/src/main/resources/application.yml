@@ -31,12 +31,12 @@ web:
           - xyz.fmcy.adminserver.filter.app.rules
 
 aliyu:
-  accessKeyId: LTAI5t92yBJPVJbYPZksbp7G
-  accessKeySecret: W4XxaIZf7DMSmCsrYY5PBs6fApRwzv
+  accessKeyId: ***
+  accessKeySecret: ***
   sms:
     url: dysmsapi.aliyuncs.com
     sign-name: 阿里云短信测试
-    template-code: SMS_154950909
+    template-code: ***
   oss:
     endpoint: https://oss-cn-hangzhou.aliyuncs.com
     bucket-name: xyz-fmcy-ceshi
