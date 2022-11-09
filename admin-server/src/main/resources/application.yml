@@ -5,11 +5,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mysql:///pt_db?serverTimezone=UTC #jdbc:mysql://121.4.252.73:3307/pt_db?serverTimezone=UTC
+    url: jdbc:mysql:///pt_db?serverTimezone=UTC #jdbc:mysql://*******/pt_db?serverTimezone=UTC
   thymeleaf:
     prefix: classpath:/templates/
   redis:
-    host: 121.4.252.73
+    host: ******
     port: 6380
     timeout: 5000
     jedis:
