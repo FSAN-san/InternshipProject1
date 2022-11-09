@@ -5,11 +5,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mysql:///pt_db?serverTimezone=UTC #jdbc:mysql://121.4.252.73:3307/pt_db?serverTimezone=UTC
+    url: jdbc:mysql:///pt_db?serverTimezone=UTC #jdbc:mysql://******/pt_db?serverTimezone=UTC
   thymeleaf:
     prefix: classpath:/templates/
   redis:
-    host: 121.4.252.73
+    host: *****
     port: 6380
     timeout: 5000
     jedis:
@@ -31,12 +31,12 @@ web:
           - xyz.fmcy.adminserver.filter.app.rules
 
 aliyu:
-  accessKeyId: LTAI5t92yBJPVJbYPZksbp7G
-  accessKeySecret: W4XxaIZf7DMSmCsrYY5PBs6fApRwzv
+  accessKeyId: ****
+  accessKeySecret: ****
   sms:
     url: dysmsapi.aliyuncs.com
     sign-name: 阿里云短信测试
-    template-code: SMS_154950909
+    template-code: ****
   oss:
     endpoint: https://oss-cn-hangzhou.aliyuncs.com
     bucket-name: xyz-fmcy-ceshi
