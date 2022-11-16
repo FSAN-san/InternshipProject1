@@ -1,0 +1,42 @@
+p {
+  margin: 0;
+}
+
+.column-box {
+  margin: 40px 40px;
+
+  .column {
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 4px #EFF5F5;
+
+    .title {
+      border-radius: 10px 10px 0 0;
+      text-align: center;
+      letter-spacing: 3px;
+      font-weight: 400;
+      color: #497174;
+      height: 50px;
+      line-height: 50px;
+      background-color: #D6E4E5;
+    }
+
+    .content {
+      padding: 0 20px;
+      overflow: auto;
+      height: 225px;
+
+      > p {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        margin: 20px 0;
+
+        &:hover {
+          color: #5DA7DB;
+        }
+      }
+    }
+  }
+}

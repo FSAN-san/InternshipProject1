@@ -1,29 +1,32 @@
 // v6路由（使用hooks）
-
 import { useRoutes, Navigate } from 'react-router-dom'
-import { Suspense, lazy } from 'react'
+import React, { Suspense, lazy } from 'react'
 import { RouteObject } from 'react-router/lib/router'
+import PublicInfo from '../pages/public/Info'
+import PublicHome from '../pages/public/Home'
+import PublicDub from '../pages/public/Dub'
 
 // 懒加载
 const Error = lazy(() => import('../pages/Error'))
 const App = lazy(() => import('../App'))
-const Info = lazy(() => import('../pages/manage/Info'))
-const User = lazy(() => import('../pages/manage/User'))
-const Audit = lazy(() => import('../pages/manage/Audit'))
-const PublicInfo = lazy(() => import('../pages/public/Info'))
-const PublicDemo = lazy(() => import('../pages/public/Demo'))
+// 管理页面路由
+const Manage = {
+    Info: lazy(() => import('../pages/manage/Info')),
+    User: lazy(() => import('../pages/manage/User')),
+    Audit: lazy(() => import('../pages/manage/Audit'))
+}
 
 const routes: RouteObject[] = [
     {
         path: '/',
-        element: <Navigate to={'/public/info'} />
+        element: <Navigate to={'/public/home'} />
     },
     {
         path: '/manage',
         children: [
             {
                 path: 'info',
-                element: <Info />
+                element: <Manage.Info />
             },
             {
                 path: 'main',
@@ -31,11 +34,11 @@ const routes: RouteObject[] = [
                 children: [
                     {
                         path: 'audit',
-                        element: <Audit />
+                        element: <Manage.Audit />
                     },
                     {
                         path: 'user',
-                        element: <User />
+                        element: <Manage.User />
                     }
                 ]
             }
@@ -43,14 +46,24 @@ const routes: RouteObject[] = [
     },
     {
         path: '/public',
+        element: <PublicInfo />,
         children: [
             {
-                path: 'info',
-                element: <PublicInfo />
+                path: 'home',
+                element: <PublicHome />
             },
             {
-                path: 'demo',
-                element: <PublicDemo />
+                path: 'dub',
+                children: [
+                    {
+                        path: 'dub1',
+                        element: <PublicDub />
+                    },
+                    {
+                        path: 'dub1',
+                        element: <PublicDub />
+                    }
+                ]
             }
         ]
     },

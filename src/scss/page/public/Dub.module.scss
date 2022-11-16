@@ -1,0 +1,52 @@
+.classification {
+  padding: 10px;
+
+  .classification-header, .classification-content {
+    > div {
+      height: 40px;
+      line-height: 40px;
+    }
+  }
+
+  .classification-header {
+    max-width: 100px;
+    > div{
+      // text-align: right;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+
+  .classification-content{
+    span {
+      display: inline-block;
+      padding: 0 20px;
+      color: #787878;
+    }
+  }
+}
+
+.lists {
+  display: flex;
+  flex-flow: wrap;
+
+  > div {
+    height: 150px;
+    flex: 50%;
+    padding: 10px;
+
+    .list {
+      background-color: pink;
+      padding: 10px;
+      height: 100%;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    > div {
+      flex: 100%;
+      padding: 10px 0;
+    }
+  }
+}
+

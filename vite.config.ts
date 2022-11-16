@@ -34,15 +34,13 @@ export default defineConfig({
                 autoprefixer
             ]
         }
-    },
-    // 跨域代理，需要自己改：请求地址：/api/XXX，接口地址：http://localhost:5000/api/XXX
-    server: {
-        proxy: {
-            '/api': {
-                target: 'http://121.4.252.73:8081',
-                // target: 'http://192.168.9.128:8081',
-                rewrite: path => path.replace(/^\/api/, '')
-            }
-        }
     }
+    // 跨域代理，需要自己改：请求地址：/api/XXX，接口地址：http://localhost:5000/api/XXX
+    // server: {
+    //     proxy: {
+    //         '/api': {
+    //             target: 'http://localhost:5000'
+    //         }
+    //     }
+    // }
 })
