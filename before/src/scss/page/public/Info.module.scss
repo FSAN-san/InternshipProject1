@@ -1,0 +1,28 @@
+h3 {
+  margin: 0;
+}
+
+.container {
+  width: 100vw;
+  max-width: 1200px;
+  margin: 0 auto;
+
+
+  header {
+    .carousel {
+      height: 200px;
+      line-height: 200px;
+      h3 {
+        color: #fff;
+        text-align: center;
+        background: #364d79;
+      }
+    }
+  }
+
+  .nav {
+    .column{
+
+    }
+  }
+}
