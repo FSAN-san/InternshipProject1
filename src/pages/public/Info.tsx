@@ -1,57 +1,25 @@
 import c from '../../scss/page/public/Info.module.scss'
 import { Carousel, Menu } from 'antd'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { MailOutlined } from '@ant-design/icons'
-import { ItemType } from 'antd/es/menu/hooks/useItems'
+import * as Icons from '@ant-design/icons'
+import { connect } from 'react-redux'
 
-const items: ItemType[] = [
-    {
-        label: '首页',
-        key: '/public/home',
-        icon: <MailOutlined />
-    },
-    {
-        label: '配音',
-        key: '/public/dub',
-        icon: <MailOutlined />,
-        children: [
-            {
-                label: '配音一',
-                key: '/public/dub/dub1'
-            },
-            {
-                label: '配音二',
-                key: '/public/dub/dub2'
-            }
-        ]
-    },
-    {
-        label: '视频加工',
-        key: '/public/video',
-        icon: <MailOutlined />
-    },
-    {
-        label: 'PPT制作',
-        key: '/public/ppt',
-        icon: <MailOutlined />
-    },
-    {
-        label: '歌曲制作',
-        key: '/public/song',
-        icon: <MailOutlined />
-    },
-    {
-        label: '项目合作',
-        key: '/public/product',
-        icon: <MailOutlined />
-    }
-]
-
-const Info: FC = () => {
+const Info: FC<any> = (prop) => {
     const navigate = useNavigate()
+    const { MenuItemState: { navItems } } = prop
     const location = useLocation()
+    const [currentMenuKey, setCurrentMenuKey] = useState<string>(location.pathname)
 
+    // 将字符串icon渲染为组件
+    const renderIcon = (items: any) => {
+        if (!items) return
+        return items.map((v: any) => ({
+            ...v,
+            icon: React.createElement(Icons[v.icon as keyof typeof Icons] as any),
+            children: renderIcon(v.children)
+        }))
+    }
     return (
         <>
             <div className={c.container}>
@@ -73,10 +41,15 @@ const Info: FC = () => {
                     <Menu
                         onClick={({ key }) => {
                             navigate(key)
+                            setCurrentMenuKey(key)
                         }}
-                        selectedKeys={[location.pathname]}
+                        selectedKeys={[currentMenuKey]}
                         mode="horizontal"
-                        items={items}
+                        items={navItems && [{
+                            label: '首页',
+                            key: '/public/home',
+                            icon: <Icons.HomeOutlined />
+                        }, ...renderIcon(navItems)]}
                     />
                 </div>
                 <div style={{ padding: '10px' }}>
@@ -87,4 +60,6 @@ const Info: FC = () => {
     )
 }
 
-export default Info
+export default connect((state: any) => ({
+    MenuItemState: state.MenuItemReducer
+}), {})(Info)

@@ -26,15 +26,29 @@ p {
       overflow: auto;
       height: 225px;
 
-      > p {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
+      > div {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
         cursor: pointer;
-        margin: 20px 0;
 
         &:hover {
           color: #5DA7DB;
+        }
+
+        p {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          flex: 55%;
+
+        }
+
+        span {
+          text-align: right;
+          white-space: nowrap;
+          padding-left: 15px;
+          flex: 0;
         }
       }
     }

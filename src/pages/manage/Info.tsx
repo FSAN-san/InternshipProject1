@@ -2,10 +2,27 @@ import { FC, useState } from 'react'
 import '../../scss/page/manage/Info.scss'
 import { Form, Input, Button } from 'antd'
 import { ContactsOutlined, UserOutlined, LockOutlined } from '@ant-design/icons'
-import { login, sendPhone } from '../../axios/api/user'
+import { sendPhone } from '../../axios/api/admin/user'
 
 const Info: FC = () => {
     const { Search } = Input
+    const rules: {
+        [k: string]: any
+    } = {
+        phone: [
+            { required: true, message: '手机号不可为空!' },
+            () => ({
+                validator (_: any, value: string) {
+                    if (!value) return Promise.resolve()
+                    if (!/^[1][3-9][0-9]{9}$/.test(value)) return Promise.reject(new Error('请输入正确的手机号！'))
+                    return Promise.resolve()
+                }
+            })
+        ],
+        password: [
+            { required: true, message: '密码不可为空!' }
+        ]
+    }
     const [formState, setFormState] = useState<'login' | 'register'>('login')
     // 表单对象
     const [loginForm] = Form.useForm()
@@ -18,11 +35,11 @@ const Info: FC = () => {
     }
     // 登录事件
     const toLogin = (value: any) => {
-        console.log(value)
         const { phone, password, captcha } = value
-        login(phone, password, captcha).then(res => {
-            console.log(res)
-        })
+        console.log(phone, password, captcha)
+        // login(phone, password, captcha).then(res => {
+        //     console.log(res)
+        // })
     }
     const toRegister = (value: any) => {
         console.log(value)
@@ -52,7 +69,7 @@ const Info: FC = () => {
                             >
                                 <Form.Item
                                     name="phone"
-                                    rules={[{ required: true, message: '手机号不可为空!' }]}
+                                    rules={rules.phone}
                                     className="only-input"
                                 >
                                     <Input
@@ -104,7 +121,7 @@ const Info: FC = () => {
                             >
                                 <Form.Item
                                     name="phone"
-                                    rules={[{ required: true, message: '手机号不可为空!' }]}
+                                    rules={rules.phone}
                                     className="only-input"
                                 >
                                     <Input
@@ -124,11 +141,13 @@ const Info: FC = () => {
                                 </Form.Item>
                                 <Form.Item
                                     name="againPwd"
-                                    rules={[{ required: true, message: '请再次输入密码!' }]}
+                                    rules={[
+                                        { required: true, message: '请再次输入密码!' }
+                                    ]}
                                     className="only-input"
                                 >
                                     <Input.Password
-                                        placeholder="密码"
+                                        placeholder="重复密码"
                                         prefix={<LockOutlined className="site-form-item-icon" />}
                                     />
                                 </Form.Item>
@@ -150,7 +169,7 @@ const Info: FC = () => {
                                     <Button type="primary" block htmlType="submit"
                                         style={{ width: '200px', height: '50px' }}
                                     >
-                                        注册
+                                        申请注册
                                     </Button>
                                 </Form.Item>
                             </Form>

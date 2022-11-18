@@ -1,27 +1,27 @@
 .classification {
   padding: 10px;
 
-  .classification-header, .classification-content {
-    > div {
-      height: 40px;
-      line-height: 40px;
-    }
-  }
+  .classification-row {
+    margin: 20px 0;
+    display: flex;
 
-  .classification-header {
-    max-width: 100px;
-    > div{
-      // text-align: right;
-      font-size: 16px;
-      font-weight: 400;
+    &:first-child {
+      margin-right: 20px;
     }
-  }
 
-  .classification-content{
-    span {
-      display: inline-block;
-      padding: 0 20px;
-      color: #787878;
+    .classification-select {
+      display: flex;
+      flex: 1;
+
+      > p {
+        padding: 0 10px;
+        cursor: pointer;
+
+        &:hover {
+          color: pink;
+          font-weight: bold;
+        }
+      }
     }
   }
 }

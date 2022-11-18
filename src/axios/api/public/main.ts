@@ -31,8 +31,15 @@ const getTagAPI = () => publicApi({
     method: 'get'
 })
 
+// 获取首页数据
+const HomeNavAPI = () => publicApi({
+    url: '/category/some/title',
+    method: 'get'
+})
+
 export {
     articleAPI,
     authorAPI,
-    getTagAPI
+    getTagAPI,
+    HomeNavAPI
 }

@@ -1,39 +1,30 @@
 import { Row, Col } from 'antd'
 import c from '../../scss/page/public/Home.module.scss'
+import { FC } from 'react'
+import { connect } from 'react-redux'
 
-const Home = () => {
-    const data = [
-        {
-            title: '配音'
-        },
-        {
-            title: 'PPT制作'
-        },
-        {
-            title: '视频加工'
-        },
-        {
-            title: '歌曲制作'
-        },
-        {
-            title: '项目合作'
-        }
-    ]
+const Home: FC<any> = (prop) => {
+    const { MenuItemState: { articlesTitle } } = prop
     return (
         <div className={c['column-box']}>
             <Row gutter={[100, 40]}>
                 {
-                    data.map(v => (
+                    articlesTitle && [...articlesTitle].map((v: any) => (
                         <Col key={v.title} xs={24} sm={12} xl={8}>
                             <div className={c.column}>
                                 <h2 className={c.title}>{v.title}</h2>
                                 <div className={c.content}>
                                     {
-                                        [...new Array(10).keys()].map(j => (
-                                            <p key={new Date().getDate() + j}>
-                                                这是{v.title}这是{v.title}这是{v.title}这是{v.title}这是{v.title}这是{v.title}这是{v.title}
-                                            </p>
-                                        ))
+                                        v.content.length !== 0
+                                            ? v.content.map((j: any) => (
+                                                <div key={j.title}>
+                                                    <p>
+                                                        {j.title}
+                                                    </p>
+                                                    <span>{j.time}</span>
+                                                </div>
+                                            ))
+                                            : <h4>暂无资料</h4>
                                     }
                                 </div>
                             </div>
@@ -44,5 +35,6 @@ const Home = () => {
         </div>
     )
 }
-
-export default Home
+export default connect((state: any) => ({
+    MenuItemState: state.MenuItemReducer
+}), {})(Home)
