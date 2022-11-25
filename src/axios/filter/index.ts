@@ -1,20 +1,21 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse } from 'axios'
 import { message } from 'antd'
 
-const adminApi = axios.create({
+const AdminAPI = axios.create({
     baseURL: '/api/admin'
 })
-const publicApi = axios.create({
+const UserAPI = axios.create({
+    baseURL: '/api/user'
+})
+const PublicAPI = axios.create({
     baseURL: '/api/articles'
 })
-
-// 不需要token的请求地址
-const notToken = ['/']
+const BaseAPI = axios.create({
+    baseURL: '/api'
+})
 
 const beforeFilter = (config: AxiosRequestConfig) => {
-    if (config.url && !notToken.includes(config.url)) {
-        (<AxiosRequestHeaders>config.headers).token = 'this is token'
-    }
+    (<AxiosRequestHeaders>config.headers).token = localStorage.getItem('token') || ''
     return config
 }
 
@@ -23,6 +24,11 @@ const afterFilter = ({ status, data, statusText }: AxiosResponse) => {
         message.error(statusText || '系统异常！')
         return Promise.reject(statusText)
     } else if (data.code !== 200) {
+        if (data.code === 2005) {
+            message.info('身份过期，请重新登录！')
+            location.replace('/#/manage/info')
+            return Promise.reject(data.msg)
+        }
         message.error(data.msg || '数据返回失败！')
         return Promise.reject(data.msg)
     }
@@ -36,9 +42,11 @@ const initApi = (...apis: AxiosInstance[]) => {
     })
 }
 
-initApi(adminApi, publicApi)
+initApi(AdminAPI, PublicAPI, UserAPI, BaseAPI)
 
 export {
-    adminApi,
-    publicApi
+    AdminAPI,
+    PublicAPI,
+    UserAPI,
+    BaseAPI
 }

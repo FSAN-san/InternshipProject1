@@ -27,26 +27,90 @@
 }
 
 .lists {
-  display: flex;
-  flex-flow: wrap;
-
-  > div {
+  .list {
+    margin: 10px;
     height: 150px;
-    flex: 50%;
-    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
 
-    .list {
-      background-color: pink;
-      padding: 10px;
-      height: 100%;
+    .img {
+      position: relative;
+
+      &:hover > .mask {
+        opacity: 1;
+      }
+
+      img {
+        height: 150px;
+      }
+
+      .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: .4s;
+        background-color: rgba(0, 0, 0, 0.4);
+        text-align: center;
+        line-height: 150px;
+        color: #fff;
+        font-size: 25px;
+      }
     }
-  }
 
-  @media screen and (max-width: 576px) {
-    > div {
-      flex: 100%;
-      padding: 10px 0;
+    .content {
+      margin: 10px;
+      flex: 1;
+      min-width: 0;
+
+      > div {
+        padding: 5px;
+      }
+
+      .title {
+        p {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+
+      .text {
+        height: 60px;
+
+        p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+      }
+
+      .other {
+        display: flex;
+        justify-content: space-between;
+
+        .author {
+          flex: 1;
+          min-width: 0;
+          margin-right: 5px;
+
+          p {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+        }
+
+        .date {
+          white-space: nowrap;
+        }
+      }
     }
   }
 }
-

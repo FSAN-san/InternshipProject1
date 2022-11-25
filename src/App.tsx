@@ -1,42 +1,14 @@
-import { Outlet } from 'react-router-dom'
-import {
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    DoubleLeftOutlined
-} from '@ant-design/icons'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+import * as Icons from '@ant-design/icons'
 import { Layout, Menu } from 'antd'
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
+import { connect } from 'react-redux'
 
 const { Header, Content, Footer, Sider } = Layout
 
-interface IMenu {
-    icon: string,
-    text: string,
-    path: string
-}
-
-const menu: any = [
-    {
-        icon: UserOutlined,
-        label: '管理系统首页',
-        path: '/main/home'
-    },
-    {
-        icon: VideoCameraOutlined,
-        label: '用户管理',
-        path: '/main/user'
-    },
-    {
-        icon: UploadOutlined,
-        label: '材料审核',
-        path: '/main/audit'
-    }
-]
-
-const App = () => {
+const App: FC<any> = ({ ManageItemState }) => {
+    const navigate = useNavigate()
+    const location = useLocation()
     const [collapsed, setCollapsed] = useState(false)
     return (
         <>
@@ -51,22 +23,21 @@ const App = () => {
                         overflow: 'hidden',
                         padding: '0 20px'
                     }}
-                    > {collapsed ? <DoubleLeftOutlined /> : '管理系统平台'}
+                    > {collapsed ? <Icons.DoubleLeftOutlined /> : '管理系统平台'}
                     </div>
                     <Menu
                         theme="dark"
                         mode="inline"
-                        defaultSelectedKeys={['1']}
-                        items={menu.map((v: IMenu) => ({
-                            ...v,
-                            key: v.path,
-                            icon: React.createElement(v.icon)
-                        }))}
+                        defaultSelectedKeys={[location.pathname]}
+                        onSelect={({ key }) => {
+                            navigate(key)
+                        }}
+                        items={[...ManageItemState].map(v => ({ ...v, icon: React.createElement(Icons[v.icon as keyof typeof Icons] as any) }))}
                     />
                 </Sider>
                 <Layout className="site-layout">
                     <Header className="site-layout-background" style={{ padding: '0 20px' }}>
-                        {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                        {React.createElement(collapsed ? Icons.MenuUnfoldOutlined : Icons.MenuFoldOutlined, {
                             className: 'trigger',
                             onClick: () => {
                                 setCollapsed(!collapsed)
@@ -90,4 +61,6 @@ const App = () => {
     )
 }
 
-export default App
+export default connect((state: any) => ({
+    ManageItemState: state.ManageItemReducer
+}), {})(App)

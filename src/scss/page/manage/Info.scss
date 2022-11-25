@@ -10,7 +10,8 @@
 
   .formBox {
     width: 400px;
-    height: 560px;
+    overflow: hidden;
+    transition: .7s;
     border-radius: 20px;
     background-color: #ffffff;
     perspective: 500px;

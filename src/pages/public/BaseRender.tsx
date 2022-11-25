@@ -1,7 +1,6 @@
-import { Avatar, Button, Col, Row } from 'antd'
+import { Button, Col, Row, Drawer } from 'antd'
 import c from '../../scss/page/public/BaseRender.module.scss'
-import { UserOutlined } from '@ant-design/icons'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 
 const classificationData = [
     {
@@ -21,10 +20,17 @@ const classificationData = [
         children: ['1', '2', '2', '2', '2', '2', '2', '2', '2', '2']
     }
 ]
+
 interface IProp {
     label: string
 }
-const BaseRender:FC<IProp> = (prop) => {
+
+const BaseRender: FC<IProp> = (prop) => {
+    const [open, setOpen] = useState(false)
+
+    const onClose = () => {
+        setOpen(false)
+    }
     console.log('@', prop)
     return (
         <>
@@ -44,30 +50,42 @@ const BaseRender:FC<IProp> = (prop) => {
                     }
                 </Col>
                 <Col sm={0}>
-                    <Button style={{ margin: '10px 0' }}>展开分类</Button>
+                    <Button style={{ margin: '10px' }} onClick={() => setOpen(true)}>展开分类</Button>
                 </Col>
             </Row>
             <div className={c.lists}>
-                {
-                    [...new Array(6).keys()].map(v => (
-                        <div key={v}>
-                            <div className={c.list}>
-                                <Avatar
-                                    size={{
-                                        xs: 50,
-                                        sm: 60,
-                                        md: 70,
-                                        lg: 80,
-                                        xl: 85,
-                                        xxl: 85
-                                    }}
-                                    icon={<UserOutlined />}
-                                />
-                            </div>
-                        </div>
-                    ))
-                }
+                <Row>
+                    {
+                        [...new Array(6).keys()].map(v => (
+                            <Col key={v} xs={24} sm={12}>
+                                <div className={c.list}>
+                                    <div className={c.img}>
+                                        <img src="https://joeschmoe.io/api/v1/random" style={{ height: '100%' }} alt="" />
+                                        <div className={c.mask}>123</div>
+                                    </div>
+                                    <div className={c.content}>
+                                        <div className={c.title}>
+                                            <p>标题标题题标题题题标题题题标题题题标题题题标题题题标题题题标题题题标题题题标题题题标题题题标题题标题</p>
+                                        </div>
+                                        <div className={c.text}>
+                                            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+                                        </div>
+                                        <div className={c.other}>
+                                            <div className={c.author}>
+                                                <p>作者：小次郎</p>
+                                            </div>
+                                            <div className={c.date}>2022-10-10</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Col>
+                        ))
+                    }
+                </Row>
             </div>
+            <Drawer title="请选择" placement="right" onClose={onClose} visible={open}>
+
+            </Drawer>
         </>
     )
 }

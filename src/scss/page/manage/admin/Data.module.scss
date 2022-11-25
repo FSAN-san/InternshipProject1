@@ -1,0 +1,13 @@
+.user-count, .shop-count {
+  margin: 10px;
+  box-shadow: 0 0 5px 4px #eee;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+
+  span {
+    font-size: 26px;
+  }
+}
